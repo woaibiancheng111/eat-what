@@ -1,0 +1,17 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(gh api:*)",
+      "Skill(update-config)",
+      "Bash(git clone:*)",
+      "Bash(mkdir -p \"/c/Users/Administrator/.claude/rules\")",
+      "Bash(cp -r \"/c/Users/Administrator/downloads/everything-claude-code/rules/common\" \"/c/Users/Administrator/.claude/rules/\")",
+      "Bash(cp -r \"/c/Users/Administrator/downloads/everything-claude-code/rules/typescript\" \"/c/Users/Administrator/.claude/rules/\")",
+      "Bash(cp -r \"/c/Users/Administrator/downloads/everything-claude-code/rules/python\" \"/c/Users/Administrator/.claude/rules/\")",
+      "Bash(cp -r \"/c/Users/Administrator/downloads/everything-claude-code/rules/golang\" \"/c/Users/Administrator/.claude/rules/\")",
+      "Bash(npm test:*)",
+      "Bash(git:*)",
+      "Bash(python:*)"
+    ]
+  }
+}

@@ -1,0 +1,31 @@
+<view class="container">
+  <view class="hero">
+    <view class="hero-title">SETTINGS</view>
+    <view class="hero-subtitle">SYSTEM PREFERENCES</view>
+  </view>
+  <view class="card">
+    <view class="section-title">ALGORITHM</view>
+    <view class="row-between" style="margin-bottom: 40rpx;">
+      <view>
+        <view style="font-weight: 600; font-size: 28rpx;">Weighted Random</view>
+        <view class="helper-text" style="font-size: 20rpx; margin-top: 4rpx;">Favors favorites & unseen</view>
+      </view>
+      <switch checked="{{settings.useWeightedPick}}" color="#a78bfa" data-field="useWeightedPick" bindchange="handleSwitch" />
+    </view>
+    <view class="row-between" style="border-top: 1px solid #27272a; padding-top: 32rpx;">
+      <view>
+        <view style="font-weight: 600; font-size: 28rpx;">Global Exclude Fresh</view>
+        <view class="helper-text" style="font-size: 20rpx; margin-top: 4rpx;">Skip today's ingested</view>
+      </view>
+      <switch checked="{{settings.excludeRecentlyEaten}}" color="#a78bfa" data-field="excludeRecentlyEaten" bindchange="handleSwitch" />
+    </view>
+  </view>
+  <view class="card">
+    <view class="section-title">SYSTEM DATA</view>
+    <view class="row-between" style="margin-bottom: 48rpx;">
+      <view style="font-weight: 600; font-size: 28rpx;">Inject Demo Data</view>
+      <switch checked="{{settings.showDemoData}}" color="#a78bfa" data-field="showDemoData" bindchange="handleSwitch" />
+    </view>
+    <view class="secondary-button destructive-button" bindtap="handleClearHistory">PURGE HISTORY</view>
+  </view>
+</view>

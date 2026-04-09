@@ -1,0 +1,38 @@
+{
+  "pages": [
+    "pages/index/index",
+    "pages/options/index",
+    "pages/meal-form/index",
+    "pages/filters/index",
+    "pages/settings/index"
+  ],
+  "window": {
+    "navigationBarTitleText": "OB-LUNCH",
+    "navigationBarBackgroundColor": "#09090B",
+    "navigationBarTextStyle": "white",
+    "backgroundColor": "#09090B",
+    "backgroundTextStyle": "light"
+  },
+  "tabBar": {
+    "color": "#71717A",
+    "selectedColor": "#A78BFA",
+    "backgroundColor": "#09090B",
+    "borderStyle": "black",
+    "list": [
+      {
+        "pagePath": "pages/index/index",
+        "text": "首页"
+      },
+      {
+        "pagePath": "pages/options/index",
+        "text": "午餐库"
+      },
+      {
+        "pagePath": "pages/settings/index",
+        "text": "设置"
+      }
+    ]
+  },
+  "style": "v2",
+  "sitemapLocation": "sitemap.json"
+}

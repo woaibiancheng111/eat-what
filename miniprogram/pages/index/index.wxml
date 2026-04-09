@@ -1,0 +1,90 @@
+<view class="page-container">
+  <view class="main-content">
+    <!-- Hero: Decision Trigger -->
+    <view class="hero-section">
+      <view class="picker-container" bindtap="handlePickAgain">
+        <view class="picker-glow"></view>
+        <view class="picker-button">
+          <view class="dice-icon">🎲</view>
+          <view class="picker-text">PICK NOW</view>
+        </view>
+      </view>
+      <view class="hero-sub">TAP TO END THE INDECISION</view>
+    </view>
+
+    <!-- Recommendation Card -->
+    <view wx:if="{{pickedMeal}}" class="recommendation-section">
+      <view class="recommendation-header">
+        <text class="recommendation-title">Current Suggestion</text>
+        <text class="recommendation-badge">BASED ON HISTORY</text>
+      </view>
+
+      <view class="meal-card">
+        <view class="meal-image-wrap">
+          <image class="meal-image" mode="aspectFill" src="https://images.unsplash.com/photo-1552611052-33e04de081de?auto=format&fit=crop&q=80&w=800&h=400"></image>
+          <view class="meal-image-overlay"></view>
+          <view class="meal-image-content">
+            <view class="meal-name">{{pickedMeal.name}}</view>
+            <view class="meal-tags">
+              <text class="meal-tag-stars" wx:if="{{pickedMeal.tags.length}}">★ {{pickedMeal.tags[0]}}</text>
+              <text class="meal-tag-text">{{pickedMeal.note || '今天适合吃点合胃口的'}}</text>
+            </view>
+          </view>
+        </view>
+
+        <view class="meal-details">
+          <view class="meal-info-row">
+            <view class="info-block">
+              <text class="info-label">DISTANCE</text>
+              <text class="info-value">级别 {{pickedMeal.distanceLevel}}</text>
+            </view>
+            <view class="info-divider"></view>
+            <view class="info-block">
+              <text class="info-label">PRICE</text>
+              <text class="info-value text-accent">¥ Level {{pickedMeal.priceLevel}}</text>
+            </view>
+          </view>
+
+          <view class="action-buttons">
+            <view class="btn-primary" bindtap="handleMarkEaten">
+              <text class="btn-icon">📝</text>
+              <text>Record: I ate this today</text>
+            </view>
+            <view class="btn-secondary" bindtap="handlePickAgain">
+              <text>Show me something else</text>
+            </view>
+          </view>
+        </view>
+      </view>
+    </view>
+
+    <!-- Empty State -->
+    <view wx:else class="meal-card empty-state">
+       <view class="empty-icon">🍚</view>
+       <view class="empty-title">你的午饭库还是空的</view>
+       <view class="empty-desc">赶紧去午餐库添加一些候选项吧</view>
+       <view class="btn-secondary mt-8" bindtap="handleOpenMeals">
+         <text>Go to Library</text>
+       </view>
+    </view>
+
+    <!-- Secondary Bento Grid -->
+    <view class="bento-grid">
+      <view class="bento-item" bindtap="handleOpenFilters">
+        <view class="bento-icon">📊</view>
+        <view class="bento-content">
+          <text class="bento-label">Candidates</text>
+          <text class="bento-value">{{candidateCount}} options</text>
+        </view>
+      </view>
+      <view class="bento-item">
+        <view class="bento-icon">🕒</view>
+        <view class="bento-content">
+          <text class="bento-label">Last Meal</text>
+          <text class="bento-value truncate">{{recentMealText || 'N/A'}}</text>
+        </view>
+      </view>
+    </view>
+
+  </view>
+</view>

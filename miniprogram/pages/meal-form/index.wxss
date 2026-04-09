@@ -1,0 +1,4 @@
+.destructive-button {
+	color: #D94C3D;
+	border-color: #F2C9C4;
+}
