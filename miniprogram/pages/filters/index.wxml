@@ -1,46 +1,43 @@
 <view class="container">
   <view class="hero">
-    <view class="hero-title">FILTERS</view>
-    <view class="hero-subtitle">NARROW SCOPE</view>
+    <view class="hero-title">筛选条件</view>
+    <view class="hero-subtitle">先缩小范围，再让首页帮你从更合适的候选里抽一个。</view>
   </view>
+
   <view class="card">
     <view class="row-between">
-      <view class="section-title" style="margin-bottom: 0;">MAX PRICE LEVEL</view>
-      <view style="color: #34d399; font-weight: 800; font-size: 32rpx;">{{filters.maxPriceLevel}}</view>
+      <view class="section-title">最高预算档位</view>
+      <view class="slider-value">{{filters.maxPriceLevel}}</view>
     </view>
-    <slider style="margin: 32rpx 0 16rpx;" min="0" max="2" step="1" value="{{filters.maxPriceLevel - 1}}" bindchange="handlePriceChange" activeColor="#34d399" backgroundColor="#27272a" block-color="#fafafa" />
+    <slider class="slider-control" min="0" max="2" step="1" value="{{filters.maxPriceLevel - 1}}" bindchange="handlePriceChange" activeColor="#34d399" backgroundColor="#27272a" block-color="#fafafa" />
   </view>
+
   <view class="card">
-    <view class="section-title">DISTANCE ZONES</view>
-    <view class="wrap gap-12 mt-4">
-      <view class="chip {{filters.distanceLevels.includes(1) ? 'chip-active' : ''}}" data-level="1" bindtap="handleDistanceToggle">Level 1</view>
-      <view class="chip {{filters.distanceLevels.includes(2) ? 'chip-active' : ''}}" data-level="2" bindtap="handleDistanceToggle">Level 2</view>
-      <view class="chip {{filters.distanceLevels.includes(3) ? 'chip-active' : ''}}" data-level="3" bindtap="handleDistanceToggle">Level 3</view>
-    </view>
-  </view>
-  <view class="card">
-    <view class="section-title">REQUIRE TAGS</view>
-    <view class="wrap gap-12 mt-4">
-      <view class="chip {{filters.selectedTags.includes(item) ? 'chip-active' : ''}}" wx:for="{{tagOptions}}" wx:key="*this" data-tag="{{item}}" bindtap="handleTagToggle">{{item}}</view>
+    <view class="section-title">可接受距离</view>
+    <view class="wrap gap-12">
+      <view class="chip {{item.active ? 'chip-active' : ''}}" wx:for="{{distanceOptions}}" wx:key="level" data-level="{{item.level}}" bindtap="handleDistanceToggle">{{item.label}}</view>
     </view>
   </view>
+
   <view class="card">
-     <view class="row-between" style="margin-bottom: 40rpx;">
+    <view class="section-title">想吃的类型</view>
+    <view class="wrap gap-12">
+      <view class="chip {{item.active ? 'chip-active' : ''}}" wx:for="{{tagOptionItems}}" wx:key="label" data-tag="{{item.label}}" bindtap="handleTagToggle">{{item.label}}</view>
+    </view>
+  </view>
+
+  <view class="card">
+    <view class="row-between switch-block">
       <view>
-        <view style="font-weight: 600; font-size:28rpx;">STRICT: Only Open Now</view>
+        <view class="switch-title">只看正在营业</view>
+        <view class="switch-description">避免抽到暂时吃不到的选项；是否排除今天刚吃过，请到设置页统一调整。</view>
       </view>
       <switch checked="{{filters.onlyOpen}}" color="#a78bfa" data-field="onlyOpen" bindchange="handleSwitch" />
     </view>
-    <view class="row-between pt-4" style="border-top: 1px solid #27272a; padding-top: 32rpx;">
-      <view>
-        <view style="font-weight: 600; font-size:28rpx;">Exclude Fresh</view>
-        <view class="helper-text" style="margin-top: 4rpx; font-size: 20rpx;">Skip today's eaten items</view>
-      </view>
-      <switch checked="{{filters.excludeRecentlyEaten}}" color="#a78bfa" data-field="excludeRecentlyEaten" bindchange="handleSwitch" />
-    </view>
   </view>
-  <view class="fixed-actions" style="flex-direction: row;">
-    <view class="secondary-button" style="flex: 1;" bindtap="handleReset">RESET</view>
-    <view class="primary-button" style="flex: 1.5;" bindtap="handleApply">APPLY MATRIX</view>
+
+  <view class="fixed-actions fixed-actions-row">
+    <view class="secondary-button button-flex-1" bindtap="handleReset">重置</view>
+    <view class="primary-button button-flex-strong" bindtap="handleApply">应用筛选</view>
   </view>
 </view>

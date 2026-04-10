@@ -1,90 +1,106 @@
 <view class="page-container">
   <view class="main-content">
-    <!-- Hero: Decision Trigger -->
     <view class="hero-section">
+      <view class="hero-kicker">午饭决策器</view>
+      <view class="hero-heading">今天中午吃什么？</view>
+      <view class="hero-sub">点一下，马上结束午饭纠结</view>
+
       <view class="picker-container" bindtap="handlePickAgain">
         <view class="picker-glow"></view>
         <view class="picker-button">
           <view class="dice-icon">🎲</view>
-          <view class="picker-text">PICK NOW</view>
+          <view class="picker-text">立即抽一个</view>
         </view>
       </view>
-      <view class="hero-sub">TAP TO END THE INDECISION</view>
+
+      <view class="hero-tip">会结合你的午餐库、筛选条件和当前设置来推荐。</view>
     </view>
 
-    <!-- Recommendation Card -->
-    <view wx:if="{{pickedMeal}}" class="recommendation-section">
+    <view wx:if="{{hasPickedMeal}}" class="recommendation-section">
       <view class="recommendation-header">
-        <text class="recommendation-title">Current Suggestion</text>
-        <text class="recommendation-badge">BASED ON HISTORY</text>
+        <text class="recommendation-title">今日推荐</text>
+        <text class="recommendation-badge">按当前条件推荐</text>
       </view>
 
       <view class="meal-card">
         <view class="meal-image-wrap">
-          <image class="meal-image" mode="aspectFill" src="https://images.unsplash.com/photo-1552611052-33e04de081de?auto=format&fit=crop&q=80&w=800&h=400"></image>
+          <view class="meal-image-surface"></view>
           <view class="meal-image-overlay"></view>
           <view class="meal-image-content">
+            <view class="meal-kicker">今天可以试试</view>
             <view class="meal-name">{{pickedMeal.name}}</view>
-            <view class="meal-tags">
-              <text class="meal-tag-stars" wx:if="{{pickedMeal.tags.length}}">★ {{pickedMeal.tags[0]}}</text>
-              <text class="meal-tag-text">{{pickedMeal.note || '今天适合吃点合胃口的'}}</text>
-            </view>
           </view>
         </view>
 
         <view class="meal-details">
-          <view class="meal-info-row">
-            <view class="info-block">
-              <text class="info-label">DISTANCE</text>
-              <text class="info-value">级别 {{pickedMeal.distanceLevel}}</text>
+          <view class="meal-note">{{pickedMealNote}}</view>
+
+          <view wx:if="{{pickedMealTags.length}}" class="meal-tag-list wrap gap-12">
+            <view class="chip chip-compact meal-tag-chip" wx:for="{{pickedMealTags}}" wx:key="*this">{{item}}</view>
+          </view>
+
+          <view class="stat-pill-row">
+            <view class="stat-pill">
+              <text class="stat-pill-label">距离</text>
+              <text class="stat-pill-value">{{pickedMeal.distanceLevel}} 档</text>
             </view>
-            <view class="info-divider"></view>
-            <view class="info-block">
-              <text class="info-label">PRICE</text>
-              <text class="info-value text-accent">¥ Level {{pickedMeal.priceLevel}}</text>
+            <view class="stat-pill stat-pill-accent">
+              <text class="stat-pill-label">预算</text>
+              <text class="stat-pill-value">¥ {{pickedMeal.priceLevel}} 档</text>
             </view>
           </view>
+
+          <view class="action-hint">觉得合适就直接记下来，不满意就再抽一次。</view>
 
           <view class="action-buttons">
             <view class="btn-primary" bindtap="handleMarkEaten">
               <text class="btn-icon">📝</text>
-              <text>Record: I ate this today</text>
+              <text>今天就吃这个</text>
             </view>
             <view class="btn-secondary" bindtap="handlePickAgain">
-              <text>Show me something else</text>
+              <text>换一个看看</text>
             </view>
           </view>
         </view>
       </view>
     </view>
 
-    <!-- Empty State -->
-    <view wx:else class="meal-card empty-state">
-       <view class="empty-icon">🍚</view>
-       <view class="empty-title">你的午饭库还是空的</view>
-       <view class="empty-desc">赶紧去午餐库添加一些候选项吧</view>
-       <view class="btn-secondary mt-8" bindtap="handleOpenMeals">
-         <text>Go to Library</text>
-       </view>
-    </view>
-
-    <!-- Secondary Bento Grid -->
-    <view class="bento-grid">
-      <view class="bento-item" bindtap="handleOpenFilters">
-        <view class="bento-icon">📊</view>
-        <view class="bento-content">
-          <text class="bento-label">Candidates</text>
-          <text class="bento-value">{{candidateCount}} options</text>
-        </view>
-      </view>
-      <view class="bento-item">
-        <view class="bento-icon">🕒</view>
-        <view class="bento-content">
-          <text class="bento-label">Last Meal</text>
-          <text class="bento-value truncate">{{recentMealText || 'N/A'}}</text>
-        </view>
+    <view wx:if="{{showCandidateEmpty}}" class="meal-card empty-state">
+      <view class="empty-icon">🧭</view>
+      <view class="empty-title">当前条件下没有可推荐的午餐</view>
+      <view class="empty-desc">可以先放宽筛选条件，再回来重新抽一次。</view>
+      <view class="btn-secondary mt-8" bindtap="handleOpenFilters">
+        <text>去调整筛选</text>
       </view>
     </view>
 
+    <view wx:if="{{showLibraryEmpty}}" class="meal-card empty-state">
+      <view class="empty-icon">🍚</view>
+      <view class="empty-title">你的午餐库还是空的</view>
+      <view class="empty-desc">先去午餐库添加几个候选项，我再帮你抽。</view>
+      <view class="btn-secondary mt-8" bindtap="handleOpenMeals">
+        <text>去午餐库</text>
+      </view>
+    </view>
+
+    <view wx:if="{{showOverview}}" class="overview-section">
+      <view class="overview-title">今日概览</view>
+      <view class="bento-grid">
+        <view class="bento-item" bindtap="handleOpenFilters">
+          <view class="bento-icon">📊</view>
+          <view class="bento-content">
+            <text class="bento-label">当前候选</text>
+            <text class="bento-value">{{candidateCount}} 个选项</text>
+          </view>
+        </view>
+        <view class="bento-item">
+          <view class="bento-icon">🕒</view>
+          <view class="bento-content">
+            <text class="bento-label">最近一次</text>
+            <text class="bento-value truncate">{{recentMealText}}</text>
+          </view>
+        </view>
+      </view>
+    </view>
   </view>
 </view>

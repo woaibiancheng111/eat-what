@@ -1,46 +1,60 @@
 <view class="container">
   <view class="hero">
-    <view class="hero-title">{{id ? 'EDIT MEAL' : 'NEW MEAL'}}</view>
-    <view class="hero-subtitle">CONFIGURE DATABASE</view>
+    <view class="hero-title">{{id ? '编辑午餐项' : '新增午餐项'}}</view>
+    <view class="hero-subtitle">把店名、标签和偏好补充完整，之后推荐会更贴近你的口味。</view>
   </view>
-  <view class="card" style="padding: 40rpx 32rpx;">
-    <view style="margin-bottom: 40rpx;">
-      <view class="section-title">NAME</view>
-      <input class="input" placeholder="e.g. Cyber Noodle" placeholder-style="color: #71717a;" data-field="name" bindinput="handleInput" value="{{name}}" />
+
+  <view class="card form-card">
+    <view class="form-field">
+      <view class="section-title">名称</view>
+      <input class="input" placeholder="例如：牛肉面、小碗菜、轻食沙拉" placeholder-style="color: #71717a;" data-field="name" bindinput="handleInput" value="{{name}}" />
     </view>
-    <view style="margin-bottom: 40rpx;">
-      <view class="section-title">TAGS <text style="text-transform:none; color:#52525b; font-weight:400;">(Space separated)</text></view>
-      <input class="input" placeholder="e.g. Noodle Hot Spicy" placeholder-style="color: #71717a;" data-field="tagsText" bindinput="handleInput" value="{{tagsText}}" />
+
+    <view class="form-field">
+      <view class="section-title">标签 <text class="section-note">（用空格分隔）</text></view>
+      <input class="input" placeholder="例如：面食 热乎 微辣" placeholder-style="color: #71717a;" data-field="tagsText" bindinput="handleInput" value="{{tagsText}}" />
     </view>
-    <view style="margin-bottom: 40rpx;">
+
+    <view class="form-field">
       <view class="row-between">
-        <view class="section-title" style="margin-bottom: 0;">PRICE LEVEL</view>
-        <view style="color: #34d399; font-weight: 800; font-size:32rpx;">{{priceLevel}}</view>
+        <view class="section-title">预算档位</view>
+        <view class="slider-value">{{priceLevel}}</view>
       </view>
-      <slider style="margin: 32rpx 0 16rpx;" min="0" max="2" step="1" value="{{priceLevel - 1}}" bindchange="handlePriceChange" activeColor="#a78bfa" backgroundColor="#27272a" block-color="#fafafa" />
+      <slider class="slider-control" min="0" max="2" step="1" value="{{priceLevel - 1}}" bindchange="handlePriceChange" activeColor="#a78bfa" backgroundColor="#27272a" block-color="#fafafa" />
     </view>
-    <view style="margin-bottom: 40rpx;">
+
+    <view class="form-field">
       <view class="row-between">
-        <view class="section-title" style="margin-bottom: 0;">DISTANCE LEVEL</view>
-        <view style="color: #fafafa; font-weight: 800; font-size:32rpx;">{{distanceLevel}}</view>
+        <view class="section-title">距离档位</view>
+        <view class="slider-value slider-value-neutral">{{distanceLevel}}</view>
       </view>
-      <slider style="margin: 32rpx 0 16rpx;" min="0" max="2" step="1" value="{{distanceLevel - 1}}" bindchange="handleDistanceChange" activeColor="#a78bfa" backgroundColor="#27272a" block-color="#fafafa" />
+      <slider class="slider-control" min="0" max="2" step="1" value="{{distanceLevel - 1}}" bindchange="handleDistanceChange" activeColor="#a78bfa" backgroundColor="#27272a" block-color="#fafafa" />
     </view>
-    <view class="row-between" style="margin-bottom: 32rpx; padding-top: 32rpx; border-top: 1px solid #27272a;">
-      <view style="font-weight: 600; font-size:28rpx;">Currently Open</view>
+
+    <view class="row-between switch-block">
+      <view>
+        <view class="switch-title">当前可点</view>
+        <view class="switch-description">关闭时，筛选“只看正在营业”会自动跳过它。</view>
+      </view>
       <switch checked="{{isOpen}}" color="#a78bfa" data-field="isOpen" bindchange="handleSwitch" />
     </view>
-    <view class="row-between">
-      <view style="font-weight: 600; font-size:28rpx; color: #a78bfa;">Favorite</view>
+
+    <view class="row-between switch-block">
+      <view>
+        <view class="switch-title switch-title-accent">设为收藏项</view>
+        <view class="switch-description">开启后，推荐时会更容易抽到它。</view>
+      </view>
       <switch checked="{{isFavorite}}" color="#a78bfa" data-field="isFavorite" bindchange="handleSwitch" />
     </view>
   </view>
-  <view class="card" style="padding: 40rpx 32rpx;">
-    <view class="section-title">NOTES</view>
-    <textarea class="textarea" placeholder="Add any specific context or conditions..." placeholder-style="color: #71717a;" data-field="note" bindinput="handleInput" value="{{note}}"></textarea>
+
+  <view class="card form-card">
+    <view class="section-title">备注</view>
+    <textarea class="textarea" placeholder="例如：想吃热的、下雨天优先、加班时常点这家" placeholder-style="color: #71717a;" data-field="note" bindinput="handleInput" value="{{note}}"></textarea>
   </view>
-  <view class="fixed-actions" style="flex-direction: column;">
-    <view class="primary-button" bindtap="handleSave">SAVE ENTRY</view>
-    <view wx:if="{{id}}" class="secondary-button destructive-button" bindtap="handleDelete">DELETE ENTRY</view>
+
+  <view class="fixed-actions fixed-actions-column">
+    <view class="primary-button" bindtap="handleSave">保存午餐项</view>
+    <view wx:if="{{id}}" class="secondary-button destructive-button" bindtap="handleDelete">删除午餐项</view>
   </view>
 </view>

@@ -75,3 +75,12 @@ test('settings, filters, and history roundtrip', () => {
   assert.deepEqual(getFilters().selectedTags, ['米饭'])
   assert.equal(getHistory()[0].optionName, '测试饭')
 })
+
+test('showDemoData only affects initial seeding when meals are missing', () => {
+  saveSettings({ showDemoData: false })
+  saveMeals([{ id: 'x', name: '自定义午餐', tags: [], priceLevel: 1, distanceLevel: 1, isOpen: true, isFavorite: false, weight: 1, eatCount: 0, lastEatenAt: '', note: '' }])
+
+  saveSettings({ showDemoData: true })
+
+  assert.deepEqual(getMeals(), [{ id: 'x', name: '自定义午餐', tags: [], priceLevel: 1, distanceLevel: 1, isOpen: true, isFavorite: false, weight: 1, eatCount: 0, lastEatenAt: '', note: '' }])
+})

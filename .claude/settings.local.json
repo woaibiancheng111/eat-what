@@ -11,7 +11,16 @@
       "Bash(cp -r \"/c/Users/Administrator/downloads/everything-claude-code/rules/golang\" \"/c/Users/Administrator/.claude/rules/\")",
       "Bash(npm test:*)",
       "Bash(git:*)",
-      "Bash(python:*)"
+      "Bash(python:*)",
+      "Bash(eslint:*)",
+      "Bash(npm --prefix \"/d/WORKS/eat-what\" run typecheck --if-present)",
+      "Bash(npm:*)",
+      "Bash([ -x \"/d/WORKS/eat-what/node_modules/.bin/eslint\" ])",
+      "Bash(\"/d/WORKS/eat-what/node_modules/.bin/eslint\" \"/d/WORKS/eat-what\" --ext .ts,.tsx,.js,.jsx)",
+      "Bash(node:*)",
+      "Bash(command:*)",
+      "Bash(printf \"\\\\n---FILE-SPLIT---\\\\n\")",
+      "Bash(printf \"__ESLINT_UNAVAILABLE__\")"
     ]
   }
 }

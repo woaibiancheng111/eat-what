@@ -7,7 +7,7 @@
     "pages/settings/index"
   ],
   "window": {
-    "navigationBarTitleText": "OB-LUNCH",
+    "navigationBarTitleText": "中午吃什么",
     "navigationBarBackgroundColor": "#09090B",
     "navigationBarTextStyle": "white",
     "backgroundColor": "#09090B",

@@ -1,0 +1,152 @@
+page {
+  background: #09090b;
+}
+
+.options-page {
+  padding-bottom: 220rpx;
+}
+
+.options-hero {
+  margin-bottom: 28rpx;
+}
+
+.options-title {
+  color: #fafafa;
+  font-size: 52rpx;
+  font-weight: 800;
+  letter-spacing: -0.04em;
+}
+
+.options-subtitle {
+  margin-top: 10rpx;
+  color: #71717a;
+  font-size: 24rpx;
+  line-height: 1.6;
+}
+
+.options-search {
+  display: flex;
+  align-items: center;
+  gap: 16rpx;
+  margin-bottom: 28rpx;
+  padding: 0 24rpx;
+  border: 1px solid #27272a;
+  border-radius: 20rpx;
+  background: #121215;
+}
+
+.options-search-icon {
+  color: #71717a;
+  font-size: 28rpx;
+}
+
+.options-search-input {
+  border: 0;
+  background: transparent;
+  padding-left: 0;
+  padding-right: 0;
+}
+
+.options-list {
+  display: flex;
+  flex-direction: column;
+  gap: 18rpx;
+}
+
+.options-card {
+  padding: 28rpx;
+  border: 1px solid #27272a;
+  border-radius: 24rpx;
+  background: #121215;
+  box-shadow: 0 16rpx 32rpx rgba(0, 0, 0, 0.24);
+}
+
+.options-card-head {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 16rpx;
+}
+
+.options-card-main {
+  min-width: 0;
+  flex: 1;
+}
+
+.options-card-title {
+  color: #fafafa;
+  font-size: 34rpx;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+}
+
+.options-card-sub {
+  margin-top: 8rpx;
+  color: #71717a;
+  font-size: 22rpx;
+}
+
+.options-card-star {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 48rpx;
+  height: 48rpx;
+  border-radius: 50%;
+  background: rgba(167, 139, 250, 0.14);
+  color: #a78bfa;
+  font-size: 26rpx;
+}
+
+.options-chip-row {
+  margin-top: 24rpx;
+}
+
+.options-pill-primary {
+  border-color: rgba(167, 139, 250, 0.24);
+  background: rgba(167, 139, 250, 0.08);
+  color: #c4b5fd;
+}
+
+.options-meta-row {
+  display: flex;
+  align-items: center;
+  gap: 20rpx;
+  margin-top: 24rpx;
+  padding-top: 20rpx;
+  border-top: 1px solid #27272a;
+}
+
+.options-meta-item {
+  flex: 1;
+  min-width: 0;
+}
+
+.options-meta-label {
+  color: #52525b;
+  font-size: 20rpx;
+}
+
+.options-meta-value {
+  margin-top: 8rpx;
+  color: #e4e4e7;
+  font-size: 24rpx;
+  font-weight: 600;
+}
+
+.options-meta-divider {
+  width: 1px;
+  align-self: stretch;
+  background: #27272a;
+}
+
+.options-empty-state {
+  margin-top: 40rpx;
+  border: 1px solid #27272a;
+  border-radius: 24rpx;
+  background: #121215;
+}
+
+.options-actions {
+  padding-top: 24rpx;
+}

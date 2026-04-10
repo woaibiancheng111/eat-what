@@ -1,31 +1,40 @@
 <view class="container">
   <view class="hero">
-    <view class="hero-title">SETTINGS</view>
-    <view class="hero-subtitle">SYSTEM PREFERENCES</view>
+    <view class="hero-title">设置</view>
+    <view class="hero-subtitle">调整推荐偏好，让“中午吃什么”更符合你的日常习惯。</view>
   </view>
+
   <view class="card">
-    <view class="section-title">ALGORITHM</view>
-    <view class="row-between" style="margin-bottom: 40rpx;">
+    <view class="section-title">推荐方式</view>
+
+    <view class="row-between switch-block">
       <view>
-        <view style="font-weight: 600; font-size: 28rpx;">Weighted Random</view>
-        <view class="helper-text" style="font-size: 20rpx; margin-top: 4rpx;">Favors favorites & unseen</view>
+        <view class="switch-title">优先推荐喜欢和少吃的</view>
+        <view class="switch-description">会更偏向收藏项、还没吃过或最近较少吃的选项。</view>
       </view>
       <switch checked="{{settings.useWeightedPick}}" color="#a78bfa" data-field="useWeightedPick" bindchange="handleSwitch" />
     </view>
-    <view class="row-between" style="border-top: 1px solid #27272a; padding-top: 32rpx;">
+
+    <view class="row-between switch-block">
       <view>
-        <view style="font-weight: 600; font-size: 28rpx;">Global Exclude Fresh</view>
-        <view class="helper-text" style="font-size: 20rpx; margin-top: 4rpx;">Skip today's ingested</view>
+        <view class="switch-title">首页推荐时排除今天刚吃过</view>
+        <view class="switch-description">开启后，首页每次推荐都会自动跳过今天已经记录过的午餐。</view>
       </view>
       <switch checked="{{settings.excludeRecentlyEaten}}" color="#a78bfa" data-field="excludeRecentlyEaten" bindchange="handleSwitch" />
     </view>
   </view>
+
   <view class="card">
-    <view class="section-title">SYSTEM DATA</view>
-    <view class="row-between" style="margin-bottom: 48rpx;">
-      <view style="font-weight: 600; font-size: 28rpx;">Inject Demo Data</view>
+    <view class="section-title">数据选项</view>
+
+    <view class="row-between switch-block">
+      <view>
+        <view class="switch-title">首次初始化时写入示例数据</view>
+        <view class="switch-description">仅在午餐库为空时生效，适合第一次体验时快速看到推荐效果。</view>
+      </view>
       <switch checked="{{settings.showDemoData}}" color="#a78bfa" data-field="showDemoData" bindchange="handleSwitch" />
     </view>
-    <view class="secondary-button destructive-button" bindtap="handleClearHistory">PURGE HISTORY</view>
+
+    <view class="secondary-button destructive-button" bindtap="handleClearHistory">清空历史记录</view>
   </view>
 </view>

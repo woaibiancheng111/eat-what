@@ -1,33 +1,58 @@
-<view class="container">
-  <view class="hero">
-    <view class="hero-title">LIBRARY</view>
-    <view class="hero-subtitle">YOUR LUNCH COLLECTION</view>
+<view class="container options-page">
+  <view class="options-hero">
+    <view class="options-title">午餐库</view>
+    <view class="options-subtitle">把你常吃、想吃的午饭都收进来，之后抽签会更靠谱。</view>
   </view>
-  <view style="margin-bottom: 48rpx;">
-    <input class="input" placeholder="Search meals or tags..." placeholder-style="color: #71717a;" bindinput="handleSearch" value="{{searchText}}" />
+
+  <view class="options-search">
+    <view class="options-search-icon">⌕</view>
+    <input class="input options-search-input" placeholder="搜索午餐名称或标签" placeholder-style="color: #52525b;" bindinput="handleSearch" value="{{searchText}}" />
   </view>
-  <view wx:if="{{meals.length}}">
-    <view class="card" wx:for="{{meals}}" wx:key="id" data-id="{{item.id}}" bindtap="handleEdit" hover-class="opacity-80 transition-opacity">
-      <view class="row-between">
-        <view style="font-size: 36rpx; font-weight: 700; color: #fafafa; letter-spacing: -0.02em;">{{item.name}}</view>
-        <view style="color: #a78bfa; font-size: 40rpx; text-shadow: 0 0 10px rgba(167,139,250,0.5);" wx:if="{{item.isFavorite}}">★</view>
+
+  <view wx:if="{{hasMeals}}" class="options-list">
+    <view class="options-card" wx:for="{{meals}}" wx:key="id" data-id="{{item.id}}" bindtap="handleEdit" hover-class="card-hover">
+      <view class="options-card-head">
+        <view class="options-card-main">
+          <view class="options-card-title">{{item.name}}</view>
+          <view class="options-card-sub">{{item.primaryTag}}</view>
+        </view>
+        <view wx:if="{{item.isFavorite}}" class="options-card-star">✦</view>
       </view>
-      <view class="wrap gap-12" style="margin-top: 24rpx;">
-        <view class="chip" style="height: 48rpx; padding: 0 16rpx; font-size: 20rpx;" wx:for="{{item.tags}}" wx:key="*this">{{item}}</view>
-        <view class="chip" style="height: 48rpx; padding: 0 16rpx; font-size: 20rpx; color: #34d399; border-color: rgba(52, 211, 153, 0.3); background: rgba(52, 211, 153, 0.05);">¥ Lvl {{item.priceLevel}}</view>
-        <view class="chip" style="height: 48rpx; padding: 0 16rpx; font-size: 20rpx;">Dist {{item.distanceLevel}}</view>
+
+      <view class="options-chip-row wrap gap-12">
+        <view class="chip chip-compact options-pill-primary">{{item.primaryTag}}</view>
+        <view class="chip chip-compact" wx:for="{{item.secondaryTags}}" wx:key="id">{{item.label}}</view>
+        <view class="chip chip-compact chip-success">预算 {{item.priceLevel}} 档</view>
+        <view class="chip chip-compact">距离 {{item.distanceLevel}} 档</view>
       </view>
-      <view class="helper-text" style="margin-top: 24rpx; font-size: 20rpx; text-transform: uppercase; letter-spacing: 0.05em; border-top: 1px solid #27272a; padding-top: 24rpx;">
-        LAST ATE: <text style="color: #e4e4e7;">{{item.lastEatenAt ? item.lastEatenAt.slice(0, 10) : 'NEVER'}}</text> <text style="padding:0 8rpx;color:#3f3f46">|</text> TIMES: <text style="color: #e4e4e7;">{{item.eatCount || 0}}</text>
+
+      <view class="options-meta-row">
+        <view class="options-meta-item">
+          <view class="options-meta-label">上次吃</view>
+          <view class="options-meta-value">{{item.lastEatenLabel}}</view>
+        </view>
+        <view class="options-meta-divider"></view>
+        <view class="options-meta-item">
+          <view class="options-meta-label">累计次数</view>
+          <view class="options-meta-value">{{item.eatCountLabel}} 次</view>
+        </view>
       </view>
     </view>
   </view>
-  <view wx:else class="empty-state">
-    <view class="empty-emoji">🍱</view>
-    <view style="font-size: 32rpx; font-weight: bold; color: #fafafa; margin-bottom: 8rpx;">No meals found</view>
-    <view class="helper-text">Add a new meal to expand your choices.</view>
+
+  <view wx:if="{{showSearchEmpty}}" class="empty-state options-empty-state">
+    <view class="empty-emoji">🔎</view>
+    <view class="empty-title">没有找到匹配的午餐项</view>
+    <view class="helper-text">换个关键词试试，或者检查一下标签有没有写对。</view>
   </view>
-  <view class="fixed-actions">
-    <view class="primary-button" bindtap="handleCreate">+ Add Meal</view>
+
+  <view wx:if="{{showLibraryEmpty}}" class="empty-state options-empty-state">
+    <view class="empty-emoji">🍱</view>
+    <view class="empty-title">还没有午餐候选</view>
+    <view class="helper-text">先添加几家常吃的店，首页才能帮你更快做决定。</view>
+  </view>
+
+  <view class="fixed-actions fixed-actions-row options-actions">
+    <view class="primary-button" bindtap="handleCreate">+ 新增午餐项</view>
   </view>
 </view>
